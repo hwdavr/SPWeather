@@ -2,14 +2,19 @@ package com.demo.weather.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.weather.R
+import com.demo.weather.model.City
+import com.demo.weather.model.RecentCityRepo
 import com.demo.weather.viewmodel.HomeScreenViewModel
 import com.demo.weather.viewmodel.HomeViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeScreenActivity : AppCompatActivity() {
+    private val TAG = HomeScreenActivity::class.java.simpleName
 
     private lateinit var viewModel: HomeScreenViewModel
     private lateinit var adapter: HomeScreenAdapter
@@ -22,10 +27,19 @@ class HomeScreenActivity : AppCompatActivity() {
         initUI()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadCityList()
+    }
+
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this, HomeViewModelFactory())
+        viewModel = ViewModelProviders.of(this, HomeViewModelFactory(RecentCityRepo()))
             .get(HomeScreenViewModel::class.java)
 
+        viewModel.cities.observe(this, Observer<List<City>> {
+            Log.d(TAG, "List updated")
+            adapter.updateData(it)
+        })
     }
 
     private fun initUI() {
