@@ -2,8 +2,8 @@ package com.demo.weather.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.demo.weather.model.City
-import com.demo.weather.model.CityDataSource
+import com.demo.weather.model.city.City
+import com.demo.weather.model.city.CityDataSource
 import com.demo.weather.model.util.OpenrationListener
 
 class HomeScreenViewModel(private val repository: CityDataSource): ViewModel() {

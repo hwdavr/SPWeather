@@ -6,9 +6,11 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.demo.weather.R
-import com.demo.weather.model.City
-import com.demo.weather.model.RecentCityRepo
+import com.demo.weather.model.city.City
+import com.demo.weather.model.city.RecentCityRepo
+import com.demo.weather.model.database.AppDatabase
 import com.demo.weather.viewmodel.HomeScreenViewModel
 import com.demo.weather.viewmodel.HomeViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,7 +35,10 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this, HomeViewModelFactory(RecentCityRepo()))
+        val db = Room.databaseBuilder(this, AppDatabase::class.java, "cities")
+                    .build()
+        val dao = db.cityDao()
+        viewModel = ViewModelProviders.of(this, HomeViewModelFactory(RecentCityRepo(dao)))
             .get(HomeScreenViewModel::class.java)
 
         viewModel.cities.observe(this, Observer<List<City>> {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.weather.R
-import com.demo.weather.model.City
+import com.demo.weather.model.city.City
 
 class HomeScreenAdapter(private var cities: List<City>): RecyclerView.Adapter<HomeScreenAdapter.CityViewHolder>() {
 
