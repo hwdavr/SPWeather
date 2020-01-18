@@ -1,8 +1,9 @@
-package com.demo.weather.model.city
+package com.demo.weather.model.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.demo.weather.model.city.City
 
 @Dao
 interface CityDao {

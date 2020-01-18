@@ -1,9 +1,8 @@
-package com.demo.weather.model.database
+package com.demo.weather.model.dao
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.demo.weather.model.city.City
-import com.demo.weather.model.dao.CityDao
 
 @Database(entities = [City::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
