@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.demo.weather.R
 import com.demo.weather.model.city.City
 
-class HomeScreenAdapter(private var cities: List<City>): RecyclerView.Adapter<HomeScreenAdapter.CityViewHolder>() {
+class HomeScreenAdapter(private var cities: List<City>): RecyclerView.Adapter<CityViewHolder>() {
+
+    var delegate: CityViewHolder.Delegate? = null
 
     fun updateData(data: List<City>) {
         cities = data
@@ -29,10 +31,8 @@ class HomeScreenAdapter(private var cities: List<City>): RecyclerView.Adapter<Ho
         val city = cities[position]
 
         holder.cityName.text = city.name
+        holder.view.setOnClickListener {
+            delegate?.onItemClick(city.name, holder.view)
+        }
     }
-
-    class CityViewHolder(val view: View): RecyclerView.ViewHolder(view) {
-        val cityName: TextView = view.findViewById(R.id.city_name)
-    }
-
 }

@@ -16,7 +16,8 @@ import javax.inject.Singleton
     AndroidInjectionModule::class,
     ActivityModule::class,
     ViewModelModule::class,
-    PersistenceModule::class])
+    PersistenceModule::class,
+    NetworkModule::class])
 interface AppComponent: AndroidInjector<DaggerApplication> {
 
     override fun inject(instance: DaggerApplication)

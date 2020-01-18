@@ -25,6 +25,11 @@ constructor(
         Log.d(TAG, "Injection discovered")
     }
 
+    fun insertCity(name: String) {
+        val timestamp = System.currentTimeMillis()
+        storageRepo.insertCity(City(name, timestamp))
+    }
+
     fun loadCityList() {
         storageRepo.getCities(object : OpenrationListener{
             override fun onSuccess(obj: Any?) {

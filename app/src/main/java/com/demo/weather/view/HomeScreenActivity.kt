@@ -3,11 +3,13 @@ package com.demo.weather.view
 import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.weather.R
 import com.demo.weather.model.city.City
 import com.demo.weather.model.dao.CityDao
+import com.demo.weather.model.util.CITY_ID
 import com.demo.weather.view.customview.debounce
 import com.demo.weather.view.customview.onTextChanged
 import com.demo.weather.viewmodel.HomeScreenViewModel
@@ -35,8 +38,12 @@ class HomeScreenActivity : AppCompatActivity() {
 
     private lateinit var viewModel: HomeScreenViewModel
     private lateinit var adapter: HomeScreenAdapter
+    private lateinit var context: Context
+    // Indicate weather
+    private var searching: Boolean = false
+    private var searchItem: MenuItem? = null
 
-    @Inject
+            @Inject
     lateinit var dao: CityDao
 
     @Inject
@@ -46,6 +53,7 @@ class HomeScreenActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        context = this
 
         initViewModel()
         initUI()
@@ -68,6 +76,18 @@ class HomeScreenActivity : AppCompatActivity() {
 
     private fun initUI() {
         adapter = HomeScreenAdapter(viewModel.cities.value ?: emptyList())
+        adapter.delegate = object : CityViewHolder.Delegate {
+            override fun onItemClick(city: String, view: View) {
+                if (searching) {
+                    viewModel.insertCity(city)
+                }
+                val intent = Intent(context, CityWeatherActivity::class.java)
+                intent.putExtra(CITY_ID, city)
+                startActivity(intent)
+                // Stop search view
+                searchItem?.collapseActionView()
+            }
+        }
         recycler_view.layoutManager = LinearLayoutManager(this)
         val itemDecorator = DividerItemDecorator(ContextCompat.getDrawable(this, R.drawable.divider_default)!!)
         recycler_view.addItemDecoration(itemDecorator)
@@ -79,7 +99,7 @@ class HomeScreenActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.home_menu, menu)
 
-        val searchItem: MenuItem? = menu.findItem(R.id.action_search)
+        searchItem = menu.findItem(R.id.action_search)
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as? SearchManager
         val searchView = searchItem?.actionView as? SearchView
         val searchInfo = searchManager?.getSearchableInfo(componentName)
@@ -97,11 +117,13 @@ class HomeScreenActivity : AppCompatActivity() {
         searchItem?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 setItemsVisibility(menu, null, false)
+                searching = true
                 return true
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 setItemsVisibility(menu, null, true)
+                searching = false
                 return true
             }
         })
