@@ -32,7 +32,7 @@ class PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideRecentCityRepo(@NonNull cityDao: CityDao): CityDataSource {
+    fun provideRecentCityRepo(@NonNull cityDao: CityDao): RecentCityRepo {
         return RecentCityRepo(cityDao)
     }
 }

@@ -19,5 +19,7 @@ internal abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeScreenViewModel::class)
-    internal abstract fun bindHomeScreenActivityViewModels(homeScreenViewModel: HomeScreenViewModel): ViewModel
+    internal abstract fun bindHomeScreenActivityViewModel(homeScreenViewModel: HomeScreenViewModel): ViewModel
+
+
 }
