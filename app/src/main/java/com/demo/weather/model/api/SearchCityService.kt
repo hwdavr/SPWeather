@@ -11,7 +11,6 @@ import kotlinx.serialization.json.JsonDecodingException
 import java.io.IOException
 import java.net.URL
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class SearchCityService @Inject constructor() {
     private val TAG = SearchCityService::class.java.simpleName
