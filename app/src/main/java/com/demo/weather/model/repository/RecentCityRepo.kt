@@ -28,7 +28,7 @@ constructor(val cityDao: CityDao) : CityDataSource {
     override fun insertCity(city: City) {
         scope.launch {
             runBlocking {
-                cityDao.insert(city)
+                cityDao.upsert(city)
             }
         }
     }

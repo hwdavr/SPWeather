@@ -77,9 +77,7 @@ class HomeScreenActivity : AppCompatActivity() {
         adapter = HomeScreenAdapter(viewModel.cities.value ?: emptyList())
         adapter.delegate = object : CityViewHolder.Delegate {
             override fun onItemClick(city: String, view: View) {
-                if (searching) {
-                    viewModel.insertCity(city)
-                }
+                viewModel.insertCity(city)
                 val intent = Intent(context, CityWeatherActivity::class.java)
                 intent.putExtra(CITY_ID, city)
                 startActivity(intent)
