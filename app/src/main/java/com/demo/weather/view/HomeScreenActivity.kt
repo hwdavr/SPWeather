@@ -1,7 +1,6 @@
 package com.demo.weather.view
 
 import android.app.SearchManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -43,7 +42,7 @@ class HomeScreenActivity : AppCompatActivity() {
     private var searching: Boolean = false
     private var searchItem: MenuItem? = null
 
-            @Inject
+    @Inject
     lateinit var dao: CityDao
 
     @Inject
@@ -118,12 +117,15 @@ class HomeScreenActivity : AppCompatActivity() {
             override fun onMenuItemActionExpand(item: MenuItem): Boolean {
                 setItemsVisibility(menu, null, false)
                 searching = true
+                viewModel.clearCityList()
                 return true
             }
 
             override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
                 setItemsVisibility(menu, null, true)
                 searching = false
+                // Load stored list
+                viewModel.loadCityList()
                 return true
             }
         })

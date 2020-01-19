@@ -30,6 +30,10 @@ constructor(
         storageRepo.insertCity(City(name, timestamp))
     }
 
+    fun clearCityList() {
+        cities.value = emptyList()
+    }
+
     fun loadCityList() {
         storageRepo.getCities(object : OpenrationListener{
             override fun onSuccess(obj: Any?) {
