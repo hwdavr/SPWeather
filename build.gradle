@@ -11,6 +11,9 @@ buildscript {
         dagger_version = '2.25.2'
         jackson_version = "2.9.8"
         glide_version = "4.11.0"
+        espresso_version = "3.2.0"
+        androidx_test_version = "1.2.0"
+        jacoco_version = '0.8.1'
     }
 
     repositories {
@@ -22,6 +25,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.5.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath "org.jacoco:org.jacoco.core:$jacoco_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

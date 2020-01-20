@@ -26,9 +26,9 @@ class RecentCityRepoTest {
     @Test
     fun insert() {
         // insert
-        repo.insertCity(City("Test", 4))
-        repo.insertCity(City("Test", 4))
-        verify(dao, times(2)).insert(com.nhaarman.mockitokotlin2.any())
+        repo.insertCity(City("Test 1", 4))
+        repo.insertCity(City("Test 2", 5))
+        verify(dao, times(2)).upsert(com.nhaarman.mockitokotlin2.any())
     }
 
     @Test
