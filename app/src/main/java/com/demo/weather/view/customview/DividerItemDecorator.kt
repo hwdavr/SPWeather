@@ -1,4 +1,4 @@
-package com.talengineer.magicmarker.customview
+package com.demo.weather.view.customview
 
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable

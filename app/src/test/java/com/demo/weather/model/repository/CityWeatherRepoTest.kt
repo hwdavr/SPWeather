@@ -1,14 +1,12 @@
 package com.demo.weather.model.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.RobolectricGradleTestRunner
-import com.demo.weather.model.api.SearchCityService
+import com.demo.weather.model.api.LocalWeatherService
+import com.demo.weather.model.apidata.entity.CurrentCondition
 import com.demo.weather.model.city.City
 import com.demo.weather.model.util.OpenrationListener
+import com.nhaarman.mockitokotlin2.any
 import kotlinx.coroutines.Dispatchers
-import org.mockito.Mockito.*
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -20,13 +18,14 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
-import org.robolectric.RobolectricTestRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class QueryCityRepoTest {
-    val service = mock(SearchCityService::class.java)
-    var repo = QueryCityRepo(service)
+class CityWeatherRepoTest {
+    private val service = mock(LocalWeatherService::class.java)
+    private val repo = CityWeatherRepo(service)
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
 
@@ -47,19 +46,25 @@ class QueryCityRepoTest {
     }
 
     @Test
-    fun queryCities() = runBlockingTest {
-        lenient().`when`(service.queryCities(com.nhaarman.mockitokotlin2.any())).thenReturn(
-            listOf(
-                City("City 1", 0),
-                City("City 2", 2)
-            )
-        )
-        repo.queryCities("test 1", object : OpenrationListener {
+    fun currentWeather() = runBlockingTest {
+        val mockCity = "Singapore"
+        val mockTime = "00:00"
+        val mockTemp = "0"
+        val mockIconUrl = "http://"
+        val mockWeather = "Cloudy"
+        val mockHumidity = "80"
+        val currentCondition = CurrentCondition().apply {
+            observation_time = mockTime
+            temp_C = mockTemp
+            weatherIconUrl = mockIconUrl
+            weatherDesc = mockWeather
+            humidity = mockHumidity
+        }
+        Mockito.lenient().`when`(service.currentWeather(any())).thenReturn(currentCondition)
+
+        repo.currentWeather(mockCity, object : OpenrationListener {
             override fun onSuccess(obj: Any?) {
-                val list = obj as List<City>
-                assertFalse(list.isNullOrEmpty())
-                assertEquals(list.size, 2)
-                print("Get list size ${list.size}")
+                assertEquals(obj, currentCondition)
             }
 
             override fun onError(obj: Any?) {
@@ -67,6 +72,5 @@ class QueryCityRepoTest {
             }
 
         })
-        delay(1_000)
     }
 }

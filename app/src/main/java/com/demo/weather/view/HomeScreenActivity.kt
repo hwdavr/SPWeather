@@ -19,10 +19,10 @@ import com.demo.weather.R
 import com.demo.weather.model.city.City
 import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.util.CITY_ID
+import com.demo.weather.view.customview.DividerItemDecorator
 import com.demo.weather.view.customview.debounce
 import com.demo.weather.view.customview.onTextChanged
 import com.demo.weather.viewmodel.HomeScreenViewModel
-import com.talengineer.magicmarker.customview.DividerItemDecorator
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers

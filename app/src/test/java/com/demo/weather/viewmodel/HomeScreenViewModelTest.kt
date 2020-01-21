@@ -1,40 +1,59 @@
 package com.demo.weather.viewmodel
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
-import androidx.test.core.app.ApplicationProvider
-import com.demo.weather.model.api.SearchCityService
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.demo.weather.RobolectricGradleTestRunner
 import com.demo.weather.model.city.City
-import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.repository.QueryCityRepo
 import com.demo.weather.model.repository.RecentCityRepo
-import org.junit.Test
-
-import org.junit.Assert.*
-import org.junit.runner.RunWith
-import org.mockito.Mockito
-import org.robolectric.RobolectricTestRunner
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LifecycleRegistry
 import com.demo.weather.model.util.OpenrationListener
 import com.nhaarman.mockitokotlin2.doAnswer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito.*
-import java.util.*
+import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MockitoJUnitRunner::class)
 class HomeScreenViewModelTest {
-    var storageRepo = Mockito.mock(RecentCityRepo::class.java)
-    val queryRepo = Mockito.mock(QueryCityRepo::class.java)
-    val viewModel = HomeScreenViewModel(storageRepo, queryRepo)
+    private lateinit var storageRepo: RecentCityRepo
+    private lateinit var  queryRepo: QueryCityRepo
+    private lateinit var  viewModel: HomeScreenViewModel
+    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
+
+    @Rule
+    @JvmField
+    val instantExecutorRule = InstantTaskExecutorRule()
+
+    @Before
+    fun init() {
+        Dispatchers.setMain(mainThreadSurrogate)
+        storageRepo = Mockito.mock(RecentCityRepo::class.java)
+        queryRepo = Mockito.mock(QueryCityRepo::class.java)
+        viewModel = HomeScreenViewModel(storageRepo, queryRepo)
+    }
+
+    @After
+    fun tearDown() {
+        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
+        mainThreadSurrogate.close()
+    }
 
     @Test
-    fun loadCityList() {
-        doAnswer { invocationOnMock ->
-            val listener = invocationOnMock.arguments[0] as OpenrationListener
+    fun loadCityList() = runBlockingTest {
+        doAnswer {
+            val listener = it.arguments[0] as OpenrationListener
             listener.onSuccess(
                 listOf(
                     City("City 1", 0),
@@ -44,12 +63,14 @@ class HomeScreenViewModelTest {
         }.`when`(storageRepo).getCities(com.nhaarman.mockitokotlin2.any())
 
         viewModel.loadCityList()
+
+        delay(1_000)
         assertTrue(viewModel.cities.value?.size ?: 0 > 0)
         print("Get list size ${viewModel.cities.value?.size}")
     }
 
     @Test
-    fun queryCityList() {
+    fun queryCityList() = runBlockingTest {
         doAnswer { invocationOnMock ->
             val listener = invocationOnMock.arguments[1] as OpenrationListener
             listener.onSuccess(
@@ -61,6 +82,8 @@ class HomeScreenViewModelTest {
         }.`when`(queryRepo).queryCities(ArgumentMatchers.anyString(), com.nhaarman.mockitokotlin2.any())
 
         viewModel.queryCityList("Test")
+
+        delay(1_000)
         assertTrue(viewModel.cities.value?.size ?: 0 > 0)
         print("Get list size ${viewModel.cities.value?.size}")
     }

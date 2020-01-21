@@ -60,6 +60,8 @@ project.afterEvaluate {
                 '**/di/*.*',
                 '**/binding/*.*',
                 '**/View/*.*',
+                '**/customview/*.*',
+                '**/entity/*.*',
                 '**/*Activity.*',
                 '**/*Fragment.*',
                 '**/*Adapter.*',
