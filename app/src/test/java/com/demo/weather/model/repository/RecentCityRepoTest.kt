@@ -19,6 +19,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -57,7 +58,7 @@ class RecentCityRepoTest {
 
     @Test
     fun getCities() = runBlockingTest {
-        `when`(dao.latest).thenReturn(
+        Mockito.lenient().`when`(dao.latest).thenReturn(
             listOf(
                 City("City 1", 0),
                 City("City 2", 2)
