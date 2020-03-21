@@ -1,6 +1,7 @@
 package com.demo.weather.model.api.wwo
 
 import com.demo.weather.model.api.HttpConnection
+import com.demo.weather.model.api.ILocalWeatherService
 import com.demo.weather.model.apidata.CurrentCondition
 import com.demo.weather.model.util.WWO_LOCAL_WEATHER_URL
 import com.fasterxml.jackson.databind.JsonMappingException
@@ -11,10 +12,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode
 import javax.inject.Inject
 
 
-class WWOLocalWeatherService  @Inject constructor() {
+class WWOLocalWeatherService  @Inject constructor() : ILocalWeatherService {
     private val TAG = WWOLocalWeatherService::class.java.simpleName
 
-    fun currentWeather(query: String): CurrentCondition {
+    override fun currentWeather(query: String): CurrentCondition {
         val weather = CurrentCondition()
         val url = URL("$WWO_LOCAL_WEATHER_URL&q=$query")
         val result = HttpConnection.getRequest(url) ?: return weather
@@ -26,7 +27,6 @@ class WWOLocalWeatherService  @Inject constructor() {
             weather.last_updated = currentCondition?.get("last_updated")?.textValue()
             weather.temp_C = currentCondition?.get("temp_C")?.textValue()
             weather.humidity = currentCondition?.get("humidity")?.textValue()
-            weather.temp_C = currentCondition?.get("temp_C")?.textValue()
             val weatherIconJson = currentCondition?.get("weatherIconUrl")
             weather.weatherIconUrl = parseValue(weatherIconJson)
             val weatherDescJson = currentCondition?.get("weatherDesc")

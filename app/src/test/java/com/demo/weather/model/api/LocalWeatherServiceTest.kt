@@ -1,12 +1,13 @@
 package com.demo.weather.model.api
 
+import com.demo.weather.model.api.weatherapi.WApiLocalWeatherService
 import com.demo.weather.model.api.wwo.WWOLocalWeatherService
 import org.junit.Test
 
 import org.junit.Assert.*
 
 class LocalWeatherServiceTest {
-    val api = WWOLocalWeatherService()
+    val api = WApiLocalWeatherService()
 
     @Test
     fun currentWeather() {

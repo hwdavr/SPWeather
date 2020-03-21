@@ -1,6 +1,7 @@
 package com.demo.weather.model.repository
 
 import android.util.Log
+import com.demo.weather.model.api.ILocalWeatherService
 import com.demo.weather.model.api.wwo.WWOLocalWeatherService
 import com.demo.weather.model.util.OpenrationListener
 import kotlinx.coroutines.*
@@ -9,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CityWeatherRepo @Inject
-constructor(private val service: WWOLocalWeatherService) {
+constructor(private val service: ILocalWeatherService) {
     private val TAG = CityWeatherRepo::class.java.simpleName
     private val job: Job = Job()
     private var scope = CoroutineScope(Dispatchers.IO + job)
