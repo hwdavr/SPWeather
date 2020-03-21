@@ -1,8 +1,7 @@
 package com.demo.weather.di
 
-import androidx.annotation.NonNull
-import com.demo.weather.model.api.LocalWeatherService
-import com.demo.weather.model.api.SearchCityService
+import com.demo.weather.model.api.wwo.WWOLocalWeatherService
+import com.demo.weather.model.api.wwo.WWOSearchCityService
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -13,14 +12,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSearchService(): SearchCityService {
-        return SearchCityService()
+    fun provideSearchService(): WWOSearchCityService {
+        return WWOSearchCityService()
     }
 
 
     @Provides
     @Singleton
-    fun provideCityWeatherPepo(): LocalWeatherService {
-        return LocalWeatherService()
+    fun provideCityWeatherPepo(): WWOLocalWeatherService {
+        return WWOLocalWeatherService()
     }
 }

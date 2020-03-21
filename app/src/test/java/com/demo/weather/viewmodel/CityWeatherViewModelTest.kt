@@ -1,10 +1,8 @@
 package com.demo.weather.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.model.apidata.entity.CurrentCondition
+import com.demo.weather.model.apidata.CurrentCondition
 import com.demo.weather.model.repository.CityWeatherRepo
-import com.demo.weather.model.repository.QueryCityRepo
-import com.demo.weather.model.repository.RecentCityRepo
 import com.demo.weather.model.util.OpenrationListener
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
@@ -60,7 +58,7 @@ class CityWeatherViewModelTest {
             val listener = it.arguments[1] as OpenrationListener
             listener.onSuccess(
                 CurrentCondition().apply {
-                    observation_time = mockTime
+                    last_updated = mockTime
                     temp_C = mockTemp
                     weatherIconUrl = mockIconUrl
                     weatherDesc = mockWeather

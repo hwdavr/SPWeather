@@ -1,8 +1,7 @@
 package com.demo.weather.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.RobolectricGradleTestRunner
-import com.demo.weather.model.city.City
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.repository.QueryCityRepo
 import com.demo.weather.model.repository.RecentCityRepo
 import com.demo.weather.model.util.OpenrationListener
@@ -19,7 +18,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner

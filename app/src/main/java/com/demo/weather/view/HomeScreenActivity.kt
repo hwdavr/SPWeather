@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.demo.weather.R
-import com.demo.weather.model.city.City
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.util.CITY_ID
 import com.demo.weather.view.customview.DividerItemDecorator

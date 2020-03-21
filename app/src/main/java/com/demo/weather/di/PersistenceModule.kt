@@ -3,7 +3,6 @@ package com.demo.weather.di
 import android.app.Application
 import androidx.annotation.NonNull
 import androidx.room.Room
-import com.demo.weather.model.city.CityDataSource
 import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.database.AppDatabase
 import com.demo.weather.model.repository.RecentCityRepo

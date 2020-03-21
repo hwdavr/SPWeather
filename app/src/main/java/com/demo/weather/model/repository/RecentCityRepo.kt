@@ -1,8 +1,8 @@
 package com.demo.weather.model.repository
 
 import android.util.Log
-import com.demo.weather.model.city.City
-import com.demo.weather.model.city.CityDataSource
+import com.demo.weather.model.apidata.City
+import com.demo.weather.model.apidata.CityDataSource
 import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.util.OpenrationListener
 import kotlinx.coroutines.*

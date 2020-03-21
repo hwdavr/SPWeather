@@ -1,12 +1,10 @@
 package com.demo.weather.model.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.RobolectricGradleTestRunner
-import com.demo.weather.model.city.City
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.dao.CityDao
 import com.demo.weather.model.util.OpenrationListener
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain

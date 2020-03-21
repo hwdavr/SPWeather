@@ -1,6 +1,6 @@
-package com.demo.weather.model.apidata
+package com.demo.weather.model.apidata.wwo
 
-import com.demo.weather.model.apidata.entity.SearchApiResult
+import com.demo.weather.model.apidata.wwo.SearchApiResult
 import kotlinx.serialization.*
 
 @Serializable

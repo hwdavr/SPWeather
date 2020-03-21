@@ -1,11 +1,12 @@
 package com.demo.weather.model.api
 
+import com.demo.weather.model.api.wwo.WWOLocalWeatherService
 import org.junit.Test
 
 import org.junit.Assert.*
 
 class LocalWeatherServiceTest {
-    val api = LocalWeatherService()
+    val api = WWOLocalWeatherService()
 
     @Test
     fun currentWeather() {
@@ -14,7 +15,7 @@ class LocalWeatherServiceTest {
         assertFalse(weather.weatherIconUrl.isNullOrEmpty())
         assertFalse(weather.weatherDesc.isNullOrEmpty())
         assertFalse(weather.temp_C.isNullOrEmpty())
-        assertFalse(weather.observation_time.isNullOrEmpty())
+        assertFalse(weather.last_updated.isNullOrEmpty())
         println(weather)
     }
 }

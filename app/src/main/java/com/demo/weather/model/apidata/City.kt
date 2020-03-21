@@ -1,4 +1,4 @@
-package com.demo.weather.model.city
+package com.demo.weather.model.apidata
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

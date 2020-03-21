@@ -1,4 +1,4 @@
-package com.demo.weather.model.apidata.entity
+package com.demo.weather.model.apidata.wwo
 
 import kotlinx.serialization.Serializable
 

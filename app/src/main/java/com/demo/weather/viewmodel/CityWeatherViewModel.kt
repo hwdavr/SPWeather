@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.demo.weather.model.apidata.entity.CurrentCondition
+import com.demo.weather.model.apidata.CurrentCondition
 import com.demo.weather.model.repository.CityWeatherRepo
 import com.demo.weather.model.util.OpenrationListener
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +44,7 @@ constructor(
                         temperatureLiveData.value = obj.temp_C
                         weatherDescLiveData.value = obj.weatherDesc
                         humidityLiveData.value = "Humidity: ${obj.humidity}"
-                        updatedTimeLiveData.value = "Last updated: ${obj.observation_time}"
+                        updatedTimeLiveData.value = "Last updated: ${obj.last_updated}"
                         weatherIconUrlLiveData.value = obj.weatherIconUrl
                     }
                     loadingVisibility.value = View.GONE

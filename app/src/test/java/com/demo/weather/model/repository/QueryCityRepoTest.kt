@@ -1,13 +1,11 @@
 package com.demo.weather.model.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.RobolectricGradleTestRunner
-import com.demo.weather.model.api.SearchCityService
-import com.demo.weather.model.city.City
+import com.demo.weather.model.api.wwo.WWOSearchCityService
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.util.OpenrationListener
 import kotlinx.coroutines.Dispatchers
 import org.mockito.Mockito.*
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.test.resetMain
@@ -21,11 +19,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
-import org.robolectric.RobolectricTestRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class QueryCityRepoTest {
-    val service = mock(SearchCityService::class.java)
+    val service = mock(WWOSearchCityService::class.java)
     var repo = QueryCityRepo(service)
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")

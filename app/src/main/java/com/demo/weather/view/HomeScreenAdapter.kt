@@ -1,12 +1,10 @@
 package com.demo.weather.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.weather.R
-import com.demo.weather.model.city.City
+import com.demo.weather.model.apidata.City
 
 class HomeScreenAdapter(private var cities: List<City>): RecyclerView.Adapter<CityViewHolder>() {
 

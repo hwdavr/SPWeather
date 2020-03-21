@@ -1,9 +1,8 @@
 package com.demo.weather.model.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.demo.weather.model.api.LocalWeatherService
-import com.demo.weather.model.apidata.entity.CurrentCondition
-import com.demo.weather.model.city.City
+import com.demo.weather.model.api.wwo.WWOLocalWeatherService
+import com.demo.weather.model.apidata.CurrentCondition
 import com.demo.weather.model.util.OpenrationListener
 import com.nhaarman.mockitokotlin2.any
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +23,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class CityWeatherRepoTest {
-    private val service = mock(LocalWeatherService::class.java)
+    private val service = mock(WWOLocalWeatherService::class.java)
     private val repo = CityWeatherRepo(service)
 
     private val mainThreadSurrogate = newSingleThreadContext("UI thread")
@@ -54,7 +53,7 @@ class CityWeatherRepoTest {
         val mockWeather = "Cloudy"
         val mockHumidity = "80"
         val currentCondition = CurrentCondition().apply {
-            observation_time = mockTime
+            last_updated = mockTime
             temp_C = mockTemp
             weatherIconUrl = mockIconUrl
             weatherDesc = mockWeather

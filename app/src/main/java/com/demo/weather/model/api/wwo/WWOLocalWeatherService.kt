@@ -1,19 +1,18 @@
-package com.demo.weather.model.api
+package com.demo.weather.model.api.wwo
 
-import com.demo.weather.model.apidata.entity.CurrentCondition
+import com.demo.weather.model.api.HttpConnection
+import com.demo.weather.model.apidata.CurrentCondition
 import com.demo.weather.model.util.WWO_LOCAL_WEATHER_URL
 import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.databind.JsonNode
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import java.net.URL
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
 import javax.inject.Inject
 
 
-class LocalWeatherService  @Inject constructor() {
-    private val TAG = LocalWeatherService::class.java.simpleName
+class WWOLocalWeatherService  @Inject constructor() {
+    private val TAG = WWOLocalWeatherService::class.java.simpleName
 
     fun currentWeather(query: String): CurrentCondition {
         val weather = CurrentCondition()
@@ -24,7 +23,7 @@ class LocalWeatherService  @Inject constructor() {
             val node = mapper.readTree(result) as? ObjectNode
             val dataNode = node?.get("data")
             val currentCondition = dataNode?.get("current_condition")?.get(0)
-            weather.observation_time = currentCondition?.get("observation_time")?.textValue()
+            weather.last_updated = currentCondition?.get("last_updated")?.textValue()
             weather.temp_C = currentCondition?.get("temp_C")?.textValue()
             weather.humidity = currentCondition?.get("humidity")?.textValue()
             weather.temp_C = currentCondition?.get("temp_C")?.textValue()

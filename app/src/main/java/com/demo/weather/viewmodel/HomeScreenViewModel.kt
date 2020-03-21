@@ -3,7 +3,7 @@ package com.demo.weather.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.demo.weather.model.city.City
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.repository.QueryCityRepo
 import com.demo.weather.model.repository.RecentCityRepo
 import com.demo.weather.model.util.OpenrationListener

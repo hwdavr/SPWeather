@@ -1,19 +1,17 @@
-package com.demo.weather.model.api
+package com.demo.weather.model.api.wwo
 
-import android.util.Log
-import com.demo.weather.model.apidata.SearchApiResponse
-import com.demo.weather.model.city.City
+import com.demo.weather.model.api.HttpConnection
+import com.demo.weather.model.apidata.wwo.SearchApiResponse
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.util.WWO_SEARCH_URL
-import com.fasterxml.jackson.databind.ObjectMapper
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.json.JsonDecodingException
-import java.io.IOException
 import java.net.URL
 import javax.inject.Inject
 
-class SearchCityService @Inject constructor() {
-    private val TAG = SearchCityService::class.java.simpleName
+class WWOSearchCityService @Inject constructor() {
+    private val TAG = WWOSearchCityService::class.java.simpleName
 
     fun queryCities(query: String): List<City> {
         val cities = mutableListOf<City>()

@@ -1,11 +1,7 @@
 package com.demo.weather.model.dao
 
-import com.demo.weather.model.city.City
-import android.provider.SyncStateContract.Helpers.update
+import com.demo.weather.model.apidata.City
 import androidx.room.*
-import androidx.room.Update
-
-
 
 
 @Dao

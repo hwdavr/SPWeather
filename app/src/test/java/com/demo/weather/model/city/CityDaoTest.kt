@@ -7,7 +7,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import androidx.test.core.app.ApplicationProvider
-import com.demo.weather.RobolectricGradleTestRunner
+import com.demo.weather.model.apidata.City
 import com.demo.weather.model.dao.CityDao
 import junit.framework.Assert.*
 import org.junit.runner.RunWith
