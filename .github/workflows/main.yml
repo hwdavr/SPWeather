@@ -21,6 +21,25 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: Run MobSF Analysis
+        uses: inm-certi/mobsf-action@v1.3
+        env:
+          INPUT_FILE_NAME: build/app/outputs/apk/app.apk
+          SCAN_TYPE: apk
+          OUTPUT_FILE_NAME: mobsf-report
+
+      - name: Upload MobSF Analysis PDF Result
+        uses: actions/upload-artifact@v2
+        with:
+          name: mobsf-report.pdf
+          path: mobsf-report.pdf
+
+      - name: Upload MobSF Analysis JSON Result
+        uses: actions/upload-artifact@v2
+        with:
+          name: mobsf-report.json
+          path: mobsf-report.json
         
       - name: Android Emulator Runner
         # You may pin to the exact commit or the version.
@@ -31,3 +50,5 @@ jobs:
           api-level: 28
           # custom script to run - e.g. `./gradlew connectedCheck`
           script: ./gradlew connectedAndroidTest
+      
+      
