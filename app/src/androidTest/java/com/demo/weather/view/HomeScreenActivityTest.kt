@@ -29,16 +29,16 @@ class HomeScreenActivityTest {
 
     @Test
     fun testSearchViewItemFound() {
-        onView(withId(R.id.action_search)).perform(click())
-        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText("Sin"))
+        onView(withId(R.id.action_search)).inRoot(isPlatformPopup()).perform(click())
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).inRoot(isPlatformPopup()).perform(typeText("Sin"))
         SystemClock.sleep(NETWORK_DELAY)
         assertTrue(getListcount() > 0)
     }
 
     @Test
     fun testSearchViewNotFound() {
-        onView(withId(R.id.action_search)).perform(click())
-        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText("Si"))
+        onView(withId(R.id.action_search)).inRoot(isPlatformPopup()).perform(click())
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).inRoot(isPlatformPopup()).perform(typeText("Si"))
         SystemClock.sleep(NETWORK_DELAY)
         assertTrue(getListcount() == 0)
     }
