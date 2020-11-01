@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.filters.LargeTest
@@ -29,16 +30,16 @@ class HomeScreenActivityTest {
 
     @Test
     fun testSearchViewItemFound() {
-        onView(withId(R.id.action_search)).inRoot(isPlatformPopup()).perform(click())
-        onView(isAssignableFrom(AutoCompleteTextView::class.java)).inRoot(isPlatformPopup()).perform(typeText("Sin"))
+        onView(withId(R.id.action_search)).perform(click())
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText("Sin"))
         SystemClock.sleep(NETWORK_DELAY)
         assertTrue(getListcount() > 0)
     }
 
     @Test
     fun testSearchViewNotFound() {
-        onView(withId(R.id.action_search)).inRoot(isPlatformPopup()).perform(click())
-        onView(isAssignableFrom(AutoCompleteTextView::class.java)).inRoot(isPlatformPopup()).perform(typeText("Si"))
+        onView(withId(R.id.action_search)).perform(click())
+        onView(isAssignableFrom(AutoCompleteTextView::class.java)).perform(typeText("Si"))
         SystemClock.sleep(NETWORK_DELAY)
         assertTrue(getListcount() == 0)
     }

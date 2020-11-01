@@ -66,10 +66,10 @@ project.afterEvaluate {
 
         def coverageSourceDirs = "$project.projectDir/src/main/kotlin"
 
-        classDirectories = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/${buildTypeName}", excludes: excludedFiles)
+        classDirectories.setFrom(fileTree(dir: "$project.buildDir/tmp/kotlin-classes/${buildTypeName}", excludes: excludedFiles))
 
-        sourceDirectories = files(coverageSourceDirs)
-        executionData = files("${buildDir}/jacoco/${testTaskName}.exec")
+        sourceDirectories.setFrom(files(coverageSourceDirs))
+        executionData.setFrom(files("${buildDir}/jacoco/${testTaskName}.exec"))
 
         reports {
           xml.enabled = true

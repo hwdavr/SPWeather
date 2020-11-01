@@ -11,6 +11,7 @@ import android.content.Intent
 import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.demo.weather.NETWORK_DELAY
@@ -40,11 +41,11 @@ class CityWeatherActivityTest {
     @Test
     fun testLaunch() {
         SystemClock.sleep(NETWORK_DELAY)
-        onView(withId(R.id.weather_desc)).inRoot(isPlatformPopup()).check(matches(not(withText(""))))
-        onView(withId(R.id.temperature)).inRoot(isPlatformPopup()).check(matches(not(withText(""))))
-        onView(withId(R.id.city_name)).inRoot(isPlatformPopup()).check(matches(not(withText(""))))
-        onView(withId(R.id.humidity)).inRoot(isPlatformPopup()).check(matches(not(withText(""))))
-        onView(withId(R.id.weather_icon)).inRoot(isPlatformPopup()).check(matches(isDisplayed()))
+        onView(withId(R.id.weather_desc)).check(matches(not(withText(""))))
+        onView(withId(R.id.temperature)).check(matches(not(withText(""))))
+        onView(withId(R.id.city_name)).check(matches(not(withText(""))))
+        onView(withId(R.id.humidity)).check(matches(not(withText(""))))
+        onView(withId(R.id.weather_icon)).check(matches(isDisplayed()))
     }
 
 }
