@@ -22,10 +22,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Build apk
+        run: ./gradlew assembleDebug
+      
       - name: Run MobSF Analysis
         uses: inm-certi/mobsf-action@v1.3
         env:
-          INPUT_FILE_NAME: build/app/outputs/apk/app.apk
+          INPUT_FILE_NAME: app/build/outputs/apk/debug/app-debug.apk
           SCAN_TYPE: apk
           OUTPUT_FILE_NAME: mobsf-report
 
