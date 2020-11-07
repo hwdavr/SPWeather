@@ -1,1 +1,27 @@
+# This is a basic workflow to help you get started with Actions
 
+name: Instrument Test
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the remote branch
+on:
+  push:
+    branches: [ remote ]
+  pull_request:
+    branches: [ remote ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v2
+
+      # Run the Firebase Test Lab Action
+      - name: Run tests on Firebase Test Lab
+        uses: asadmansr/Firebase-Test-Lab-Action@v1.0
+        with:
+          arg-spec: 'tests.yml:android-pixel-4'
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
