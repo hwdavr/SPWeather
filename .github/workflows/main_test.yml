@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build apk
-        run: ./gradlew connectedCheck
+        run: ./gradlew assembleAndroidTest
 
       # Run the Firebase Test Lab Action
       - name: Run tests on Firebase Test Lab
