@@ -15,7 +15,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      # Check out the repository
+      # Check out the repository 
       - uses: actions/checkout@v2
       
       - name: Build apk
