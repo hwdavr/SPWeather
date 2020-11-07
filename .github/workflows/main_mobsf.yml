@@ -6,7 +6,7 @@ name: MobSF
 # events but only for the remote branch
 on:
   push:
-    branches: [ remote ]
+    branches: [  ]
   pull_request:
     branches: [ remote ]
 
