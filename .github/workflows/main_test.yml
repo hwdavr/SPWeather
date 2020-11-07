@@ -17,6 +17,9 @@ jobs:
     steps:
       # Check out the repository
       - uses: actions/checkout@v2
+      
+      - name: Build apk
+        run: ./gradlew connectedCheck
 
       # Run the Firebase Test Lab Action
       - name: Run tests on Firebase Test Lab
