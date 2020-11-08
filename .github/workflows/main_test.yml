@@ -20,6 +20,12 @@ jobs:
       
       - name: Build apk
         run: ./gradlew assembleAndroidTest
+        
+      - name: Debug
+        run: |
+          ls ./
+          cd app
+          ls ./
 
       # Run the Firebase Test Lab Action
       - name: Run tests on Firebase Test Lab
