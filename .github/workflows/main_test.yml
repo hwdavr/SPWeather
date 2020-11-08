@@ -23,9 +23,9 @@ jobs:
         
       - name: Debug
         run: |
+          cd app/build/outputs/apk/debug/
           ls ./
-          cd app
-          ls ./
+          cd ../../../../../
 
       # Run the Firebase Test Lab Action
       - name: Run tests on Firebase Test Lab
