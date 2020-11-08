@@ -19,7 +19,9 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Build apk
-        run: ./gradlew assembleAndroidTest
+        run: |
+          ./gradlew assembleDebug
+          ./gradlew assembleAndroidTest
         
       - name: Debug
         run: |
