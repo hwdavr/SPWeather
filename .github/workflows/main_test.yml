@@ -22,12 +22,6 @@ jobs:
         run: |
           ./gradlew assembleDebug
           ./gradlew assembleAndroidTest
-        
-      - name: Debug
-        run: |
-          cd app/build/outputs/apk/debug/
-          ls ./
-          cd ../../../../../
 
       # Run the Firebase Test Lab Action
       - name: Run tests on Firebase Test Lab
